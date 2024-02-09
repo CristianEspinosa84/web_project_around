@@ -7,13 +7,13 @@
   padding: 0;
 }
 
-.element__image {
+.elements__image {
   max-width: 288px;
   width: 100%;
   border-radius: 10px;
 }
 
-.element__title {
+.elements__title {
   font-family: Inter;
   font-size: 24px;
   font-weight: 900;
@@ -31,13 +31,13 @@
 }
 
 @media screen and (max-width: 915px) {
-  .element__images {
+  .elements__images {
     padding: 0;
   }
 }
 
 @media screen and (max-width: 542px) {
-  .element__image {
+  .elements__image {
     border-radius: 5px;
   }
 }
