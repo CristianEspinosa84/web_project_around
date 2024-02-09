@@ -1,0 +1,43 @@
+.element__images {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 0;
+}
+
+.element__image {
+  max-width: 288px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.element__title {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  letter-spacing: 0em;
+  color: #000;
+  background-color: #fff;
+  max-height: 50px;
+  padding: 30px;
+  margin: 0;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 915px) {
+  .element__images {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 542px) {
+  .element__image {
+    border-radius: 5px;
+  }
+}
