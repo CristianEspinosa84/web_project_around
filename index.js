@@ -13,6 +13,9 @@ const formButton = document.querySelector(".form__button");
 function openPopup() {
   formSection.classList.add("popup__opened");
   overlay.classList.add("overlay__visible");
+
+  inputName.value = profileNameElement.textContent;
+  inputAbout.value = profileAboutElement.textContent;
 }
 
 function closeForm() {
@@ -22,6 +25,12 @@ function closeForm() {
 
 function formElement(evt) {
   evt.preventDefault();
+
+  if (inputName.value.trim() === "" || inputAbout.value.trim() === "") {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
+
   profileNameElement.textContent = inputName.value;
   profileAboutElement.textContent = inputAbout.value;
   closeForm();
