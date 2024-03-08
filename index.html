@@ -31,6 +31,49 @@
           <button class="form__button">Guardar</button>
         </form>
       </div>
+
+      <div class="form closed-window" id="addcard-popud">
+        <form class="form__popup" id="addcard-form">
+          <h2 class="form__title">Nuevo Lugar</h2>
+          <a href="#">
+            <img
+              src="./Images/CloseIcon.jpg"
+              alt="imageclose"
+              class="form__close"
+              id="addcard-close"
+            />
+          </a>
+
+          <input
+            type="text"
+            class="form__name"
+            placeholder="Titulo"
+            id="addcard-title"
+          />
+          <hr class="form__line" />
+
+          <input
+            type="text"
+            class="form__about"
+            placeholder="Enlace a la imagen"
+            id="addcard-url"
+          />
+          <hr class="form__line" />
+
+          <button class="form__button" id="addcard-button">crear</button>
+        </form>
+      </div>
+
+      <div class="form closed-window" id="popup__image">
+        <img
+          src="./Images/CloseIcon.jpg"
+          alt="imageclose"
+          class="popup__close"
+        />
+        <img class="popup__picture" src="" alt="image" />
+        <h3 class="popup__title"></h3>
+      </div>
+
       <div class="overlay"></div>
       <header class="header">
         <img src="./Images/Vector.jpg" alt="imagelogo" class="header__logo" />
@@ -59,84 +102,26 @@
           <p class="profile__button">+</p>
         </section>
 
-        <ul class="element">
-          <li class="elements">
-            <img
-              src="./Images/YosemiteValley.jpg"
-              alt="imageyosemite"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Yosemite Valley
-              <span><img src="./Images/Like.jpg" alt="imagelike" /></span>
-            </p>
-          </li>
-          <li class="elements">
-            <img
-              src="./Images/LakeLouise.jpg"
-              alt="imageloke"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Lake Louise
-              <span><img src="./Images/Like.jpg" alt="imagelike" /></span>
-            </p>
-          </li>
-          <li class="elements">
-            <img
-              src="./Images/BaldMountains.jpg"
-              alt="imagebald"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Bald Mountains
-              <span><img src="./Images/Like.jpg" alt="imagelike" /></span>
-            </p>
-          </li>
-        </ul>
-
-        <ul class="element">
-          <li class="elements">
-            <img
-              src="./Images/Latemar.jpg"
-              alt="imagelatemar"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Latemar
-              <span><img src="./Images/Like.jpg" alt="imagelike" /></span>
-            </p>
-          </li>
-          <li class="elements">
-            <img
-              src="./Images/VanoiseNationa.jpg"
-              alt="imagevanoise"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Vanoise Nationa...<span
-                ><img src="./Images/Like.jpg" alt="imagelike"
-              /></span>
-            </p>
-          </li>
-          <li class="elements">
-            <img
-              src="./Images/LagodiBraies.jpg"
-              alt="imagelago"
-              class="elements__image"
-            />
-            <p class="elements__title">
-              Lago di Braies
-              <span><img src="./Images/Like.jpg" alt="imagelike" /></span>
-            </p>
-          </li>
-        </ul>
+        <div class="elements"></div>
       </main>
 
-      <script src="./index.js"></script>
       <footer class="footer">
-        <p>© 2020 Around The U.S.</p>
+        <h2 class="footer__copyright">© 2020 Around The U.S.</h2>
       </footer>
     </div>
+
+    <template class="template-card">
+      <div class="element">
+        <img src="" alt="image" class="element__image" />
+
+        <div class="element__info">
+          <button class="element__trash"></button>
+          <h2 class="element__title"></h2>
+          <button class="element__like"></button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./index.js"></script>
   </body>
 </html>

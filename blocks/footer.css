@@ -1,4 +1,12 @@
 .footer {
+  max-width: 880px;
+  width: 100%;
+  margin: auto;
+  margin-top: 67px;
+  padding-bottom: 60px;
+}
+
+.footer__copyright {
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -6,11 +14,7 @@
   letter-spacing: 0em;
   text-align: left;
   color: #fff;
-  margin-top: 67px;
-  padding-left: 205px;
-  padding-bottom: 60px;
 }
-
 @media screen and (max-width: 600px) {
   .footer {
     padding-left: 180px;

@@ -1,33 +1,80 @@
+.elements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 880px;
+}
+
 .element {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 0;
+  width: 282px;
+  height: 361px;
 }
 
-.elements__image {
-  max-width: 288px;
+.element__image {
+  max-width: 282px;
+  height: 282px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
 }
 
-.elements__title {
+.element__title {
   font-family: Inter;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 900;
   line-height: 29px;
   letter-spacing: 0em;
   color: #000;
-  background-color: #fff;
-  max-height: 50px;
-  padding: 30px;
+  padding: 20px;
   margin: 0;
   text-align: center;
-  border-radius: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.element__info {
+  background-color: #fff;
+  max-width: 282px;
+  max-height: 70px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+}
+
+.element__trash {
+  background-color: transparent;
+  background-image: url(/Images/trash.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  bottom: 300px;
+  left: 240px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.element__trash:hover {
+  opacity: 0.7;
+}
+
+.element__like {
+  background-color: transparent;
+  background-image: url(/Images/Like.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+
+.element__like-black {
+  background-image: url(/Images/like_black.jpg);
 }
 
 @media screen and (max-width: 915px) {
