@@ -45,7 +45,7 @@
 
 .element__trash {
   background-color: transparent;
-  background-image: url(/Images/trash.jpg);
+  background-image: url(../Images/trash.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   border: none;
