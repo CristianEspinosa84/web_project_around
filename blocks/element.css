@@ -65,7 +65,7 @@
 
 .element__like {
   background-color: transparent;
-  background-image: url(/Images/Like.jpg);
+  background-image: url(../Images/Like.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   width: 25px;
@@ -74,7 +74,7 @@
 }
 
 .element__like-black {
-  background-image: url(/Images/like_black.jpg);
+  background-image: url(../Images/like_black.jpg);
 }
 
 @media screen and (max-width: 915px) {
