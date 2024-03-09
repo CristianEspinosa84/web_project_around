@@ -17,7 +17,7 @@ const cardArea = document.querySelector(".elements");
 const addInpuntTitle = document.querySelector("#addcard-title");
 const addInpuntUrl = document.querySelector("#addcard-url");
 const addCardForm = document.querySelector("#addcard-form");
-const popudOpenImage = document.querySelector("#popup__image");
+const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 
 const initialCards = [
@@ -70,12 +70,16 @@ function closeAddCard() {
   overlay.classList.toggle("overlay__visible");
 }
 
-function openPopupImage() {
-  popudOpenImage.classList.add("popup__opened");
+function openPopupImage(link, title) {
+  popupOpenImage.classList.add("popup__opened");
+  const cardTitle = popupOpenImage.querySelector(".popup__title");
+  const cardPicture = popupOpenImage.querySelector(".popup__picture");
+  cardPicture.src = link;
+  cardTitle.textContent = title;
   overlay.classList.add("overlay__visible");
 }
 function closePopupImage() {
-  popudOpenImage.classList.remove("popup__opened");
+  popupOpenImage.classList.remove("popup__opened");
   overlay.classList.remove("overlay__visible");
 }
 
@@ -108,7 +112,7 @@ function cardGenerator(title, link) {
   });
 
   cardImage.addEventListener("click", function () {
-    openPopupImage();
+    openPopupImage(link, title);
   });
   return card;
 }
