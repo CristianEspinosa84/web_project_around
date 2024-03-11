@@ -72,6 +72,7 @@ function closeAddCard() {
 
 function openPopupImage(link, title) {
   popupOpenImage.classList.add("popup__opened");
+  popupOpenImage.classList.remove("popup-closed");
   const cardTitle = popupOpenImage.querySelector(".popup__title");
   const cardPicture = popupOpenImage.querySelector(".popup__picture");
   cardPicture.src = link;
@@ -80,6 +81,7 @@ function openPopupImage(link, title) {
 }
 function closePopupImage() {
   popupOpenImage.classList.remove("popup__opened");
+  popupOpenImage.classList.add("popup-closed");
   overlay.classList.remove("overlay__visible");
 }
 
@@ -114,6 +116,7 @@ function cardGenerator(title, link) {
   cardImage.addEventListener("click", function () {
     openPopupImage(link, title);
   });
+
   return card;
 }
 
