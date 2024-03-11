@@ -221,4 +221,8 @@
     left: 150px;
     bottom: 2px;
   }
+
+  .popup__title {
+    width: 270px;
+  }
 }
