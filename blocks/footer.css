@@ -28,21 +28,3 @@
     justify-content: flex-start;
   }
 }
-
-@media screen and (max-width: 542px) {
-  .footer {
-    /* padding-left: 150px; */
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .footer {
-    /* padding-left: 100px; */
-  }
-}
-
-@media screen and (max-width: 380px) {
-  .footer {
-    /* padding-left: 20px; */
-  }
-}
