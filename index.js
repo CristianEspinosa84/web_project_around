@@ -85,7 +85,7 @@ function closePopupImage() {
   overlay.classList.remove("overlay__visible");
 }
 
-function formElement(evt) {
+function completeFormElement(evt) {
   evt.preventDefault();
 
   if (inputName.value.trim() === "" || inputAbout.value.trim() === "") {
@@ -132,11 +132,12 @@ function addCardSubmit(evt) {
   const newCard = cardGenerator(addInpuntTitle.value, addInpuntUrl.value);
   cardArea.prepend(newCard);
   closeAddCard();
+  addCardForm.reset();
 }
 
 profileEditButton.addEventListener("click", openPopup);
 closeButton.addEventListener("click", closeForm);
-formButton.addEventListener("click", formElement);
+formButton.addEventListener("click", completeFormElement);
 addCardButton.addEventListener("click", openAddCard);
 closeButtonAddCard.addEventListener("click", closeAddCard);
 popupCloseImge.addEventListener("click", closePopupImage);
