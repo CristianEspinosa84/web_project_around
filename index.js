@@ -106,6 +106,7 @@ function cardGenerator(title, link) {
   const trashButton = card.querySelector(".element__trash");
   cardImage.src = link;
   cardTitle.textContent = title;
+  cardImage.alt = title;
   likebutton.addEventListener("click", function () {
     likebutton.classList.toggle("element__like-black");
   });
