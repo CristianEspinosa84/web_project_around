@@ -77,6 +77,7 @@ function openPopupImage(link, title) {
   const cardPicture = popupOpenImage.querySelector(".popup__picture");
   cardPicture.src = link;
   cardTitle.textContent = title;
+  cardPicture.alt = title;
   overlay.classList.add("overlay__visible");
 }
 function closePopupImage() {
@@ -98,7 +99,7 @@ function completeFormElement(evt) {
   closeForm();
 }
 
-function cardGenerator(title, link) {
+function generatorCard(title, link) {
   const card = templateCard.content.querySelector(".element").cloneNode(true);
   const cardImage = card.querySelector(".element__image");
   const cardTitle = card.querySelector(".element__title");
@@ -121,16 +122,16 @@ function cardGenerator(title, link) {
   return card;
 }
 
-cardGenerator();
+generatorCard();
 
 initialCards.forEach(function (element) {
-  const newCard = cardGenerator(element.name, element.link);
+  const newCard = generatorCard(element.name, element.link);
   cardArea.append(newCard);
 });
 
 function addCardSubmit(evt) {
   evt.preventDefault();
-  const newCard = cardGenerator(addInpuntTitle.value, addInpuntUrl.value);
+  const newCard = generatorCard(addInpuntTitle.value, addInpuntUrl.value);
   cardArea.prepend(newCard);
   closeAddCard();
   addCardForm.reset();
