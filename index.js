@@ -7,6 +7,7 @@ const formSection = document.querySelector(".form");
 const formPopup = document.querySelector(".form__popup");
 const inputName = document.querySelector(".form__name");
 const inputAbout = document.querySelector(".form__about");
+const inputElement = document.querySelector(".form__input");
 const closeButton = formSection.querySelector(".form__close");
 const formButton = document.querySelector(".form__button");
 const addCardButton = document.querySelector(".profile__button");
@@ -19,6 +20,7 @@ const addInpuntUrl = document.querySelector("#addcard-url");
 const addCardForm = document.querySelector("#addcard-form");
 const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
+const closedAll = document.querySelector(".page");
 
 const initialCards = [
   {
@@ -90,7 +92,6 @@ function completeFormElement(evt) {
   evt.preventDefault();
 
   if (inputName.value.trim() === "" || inputAbout.value.trim() === "") {
-    alert("Por favor completa todos los campos.");
     return;
   }
 
