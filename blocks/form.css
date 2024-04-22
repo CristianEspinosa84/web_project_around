@@ -16,9 +16,6 @@
   display: none;
 }
 
-.overlay {
-  position: fixed;
-}
 .form__error {
   color: red;
   font-size: 10px;
@@ -78,13 +75,6 @@
   text-align: left;
   margin-top: 20px;
 }
-
-/* .form__name:invalid {
-  border-bottom: 1px solid red;
-}
-.form__about:invalid {
-  border-bottom: 1px solid red;
-} */
 
 .form__line {
   max-width: 358px;
