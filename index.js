@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
 const profileNameElement = document.querySelector(".profile__name");
@@ -21,6 +23,7 @@ const addCardForm = document.querySelector("#addcard-form");
 const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 const closedAll = document.querySelector(".page");
+new Card();
 
 const initialCards = [
   {
@@ -133,30 +136,30 @@ function completeFormElement(evt) {
   closeForm();
 }
 
-function generatorCard(title, link) {
-  const card = templateCard.content.querySelector(".element").cloneNode(true);
-  const cardImage = card.querySelector(".element__image");
-  const cardTitle = card.querySelector(".element__title");
-  const likebutton = card.querySelector(".element__like");
-  const trashButton = card.querySelector(".element__trash");
-  cardImage.src = link;
-  cardTitle.textContent = title;
-  cardImage.alt = title;
-  likebutton.addEventListener("click", function () {
-    likebutton.classList.toggle("element__like-black");
-  });
-  trashButton.addEventListener("click", function () {
-    card.remove();
-  });
+// function generatorCard(title, link) {
+//   const card = templateCard.content.querySelector(".element").cloneNode(true);
+//   const cardImage = card.querySelector(".element__image");
+//   const cardTitle = card.querySelector(".element__title");
+//   const likebutton = card.querySelector(".element__like");
+//   const trashButton = card.querySelector(".element__trash");
+//   cardImage.src = link;
+//   cardTitle.textContent = title;
+//   cardImage.alt = title;
+//   likebutton.addEventListener("click", function () {
+//     likebutton.classList.toggle("element__like-black");
+//   });
+//   trashButton.addEventListener("click", function () {
+//     card.remove();
+//   });
 
-  cardImage.addEventListener("click", function () {
-    openPopupImage(link, title);
-  });
+//   cardImage.addEventListener("click", function () {
+//     openPopupImage(link, title);
+//   });
 
-  return card;
-}
+//   return card;
+// }
 
-generatorCard();
+// generatorCard();
 
 initialCards.forEach(function (element) {
   const newCard = generatorCard(element.name, element.link);
