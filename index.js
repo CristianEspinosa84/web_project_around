@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./Card.js";
 
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
@@ -24,7 +24,6 @@ const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 const closedAll = document.querySelector(".page");
 new Card();
-
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -162,8 +161,11 @@ function completeFormElement(evt) {
 // generatorCard();
 
 initialCards.forEach(function (element) {
-  const newCard = generatorCard(element.name, element.link);
-  cardArea.append(newCard);
+  // const newCard = generatorCard(element.name, element.link);
+  const newCard = new Card(element.name, element.link);
+  const cardElement = newCard.generateCard;
+  cardArea.append(cardElement);
+  console.log(cardArea);
 });
 
 function addCardSubmit(evt) {

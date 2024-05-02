@@ -3,17 +3,20 @@ export default class Card {
     this.title = title;
     this.link = link;
     this.template = template;
+    this.templateCard = document.querySelector(".template-card");
   }
 
   _getCardClone() {
-    this.card = templateCard.content.querySelector(".element").cloneNode(true);
+    this.card = this.templateCard.content
+      .querySelector(".element")
+      .cloneNode(true);
   }
 
   _setProperties() {
-    const cardImage = card.querySelector(".element__image");
-    const cardTitle = card.querySelector(".element__title");
-    const likebutton = card.querySelector(".element__like");
-    const trashButton = card.querySelector(".element__trash");
+    const cardImage = this.card.querySelector(".element__image");
+    const cardTitle = this.card.querySelector(".element__title");
+    const likebutton = this.card.querySelector(".element__like");
+    const trashButton = this.card.querySelector(".element__trash");
     cardImage.src = this.link;
     cardImage.alt = this.title;
     cardTitle.textContent = this.title;
