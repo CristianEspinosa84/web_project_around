@@ -23,7 +23,7 @@ const addCardForm = document.querySelector("#addcard-form");
 const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 const closedAll = document.querySelector(".page");
-new Card();
+
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -163,9 +163,10 @@ function completeFormElement(evt) {
 initialCards.forEach(function (element) {
   // const newCard = generatorCard(element.name, element.link);
   const newCard = new Card(element.name, element.link);
-  const cardElement = newCard.generateCard;
+  const cardElement = newCard.generateCard();
   cardArea.append(cardElement);
-  console.log(cardArea);
+  console.log(newCard);
+  console.log(cardElement);
 });
 
 function addCardSubmit(evt) {
