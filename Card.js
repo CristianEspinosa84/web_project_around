@@ -17,6 +17,7 @@ export default class Card {
     const cardTitle = this.card.querySelector(".element__title");
     const likebutton = this.card.querySelector(".element__like");
     const trashButton = this.card.querySelector(".element__trash");
+
     cardImage.src = this.link;
     cardImage.alt = this.title;
     cardTitle.textContent = this.title;
@@ -34,7 +35,7 @@ export default class Card {
       this.card.remove();
     });
     this.cardImage.addEventListener("click", () => {
-      this._openPopupImage(this.link, this.title);
+      this.openPopupImage(this.link, this.title);
     });
   }
 

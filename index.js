@@ -171,7 +171,7 @@ initialCards.forEach(function (element) {
 
 function addCardSubmit(evt) {
   evt.preventDefault();
-  const newCard = generatorCard(addInpuntTitle.value, addInpuntUrl.value);
+  const newCard = new Card(addInpuntTitle.value, addInpuntUrl.value);
   cardArea.prepend(newCard);
   closeAddCard();
   addCardForm.reset();
