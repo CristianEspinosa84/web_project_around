@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(title, link) {
+  constructor(title, link, selector = ".template-card") {
     this.title = title;
     this.link = link;
 
-    this.templateCard = document.querySelector(".template-card");
+    this.templateCard = document.querySelector(selector);
   }
 
   _getCardClone() {
@@ -39,7 +39,8 @@ export default class Card {
     });
   }
 
-  generateCard() {
+  generateCard(openPopupImage) {
+    this.openPopupImage = openPopupImage;
     this._getCardClone();
     this._setProperties();
     this._setEvenListenders();
