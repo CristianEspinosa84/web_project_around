@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import Utils from "./Utils.js";
+import utils from "./Utils.js";
+
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
 const profileNameElement = document.querySelector(".profile__name");
@@ -115,17 +116,17 @@ function closePopupImage() {
   overlay.classList.remove("overlay__visible");
 }
 
-function completeFormElement(evt) {
-  evt.preventDefault();
+// function completeFormElement(evt) {
+//   evt.preventDefault();
 
-  if (inputName.value.trim() === "" || inputAbout.value.trim() === "") {
-    return;
-  }
+//   if (inputName.value.trim() === "" || inputAbout.value.trim() === "") {
+//     return;
+//   }
 
-  profileNameElement.textContent = inputName.value;
-  profileAboutElement.textContent = inputAbout.value;
-  closeForm();
-}
+//   profileNameElement.textContent = inputName.value;
+//   profileAboutElement.textContent = inputAbout.value;
+//   closeForm();
+// }
 
 initialCards.forEach(function (element) {
   const newCard = new Card(element.name, element.link);
@@ -154,21 +155,21 @@ const validationSettings = {
 const formValidator = new FormValidator(validationSettings);
 formValidator.enableValidation();
 
-const settings = {
-  formPopupSelector: ".form__popup",
-  overlaySelector: ".overlay",
-  profileEditButtonSelector: ".profile__edit",
-  closeButtonSelector: ".form__close",
-  formButtonSelector: ".form__button",
-  addCardButtonSelector: ".profile__button",
-  closeButtonAddCardSelector: "#addcard-close",
-  popupCloseImageSelector: ".popup__close",
-  addCardFormSelector: "#addcard-form",
-  addCardPopupSelector: "#addcard-popud",
-  popupImageSelector: "#popup__image",
+const utilsSettings = {
+  formSection: formSection,
+  overlay: overlay,
+  inputName: inputName,
+  inputAbout: inputAbout,
+  profileNameElement: profileNameElement,
+  profileAboutElement: profileAboutElement,
+  profileEditButton: profileEditButton,
+  closeButton: closeButton,
+  formButton: formButton,
+  addCardButton: addCardButton,
+  closeButtonAddCard: closeButtonAddCard,
 };
 
-const popupManager = new Utils(settings);
+const settingsUtils = new utils(utilsSettings);
 
 // profileEditButton.addEventListener("click", openPopup);
 // closeButton.addEventListener("click", closeForm);

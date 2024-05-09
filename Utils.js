@@ -1,91 +1,89 @@
 export default class Utils {
   constructor(settings) {
-    this.settings = settings;
-    this.formSection = document.querySelector(this.settings.formPopupSelector);
-    this.overlay = document.querySelector(this.settings.overlaySelector);
-    this.assignEventHandlers();
+    this.formSection = settings.formSection;
+    this.overlay = settings.overlay;
+    this.inputName = settings.inputName;
+    this.inputAbout = settings.inputAbout;
+    this.profileNameElement = settings.profileNameElement;
+    this.profileAboutElement = settings.profileAboutElement;
+    this.profileEditButton = settings.profileEditButton;
+    this.closeButton = settings.closeButton;
+    this.formButton = settings.formButton;
+    this.addCardButton = settings.addCardButton;
+    this.closeButtonAddCard = settings.closeButtonAddCard;
   }
 
-  assignEventHandlers() {
-    document
-      .querySelector(this.settings.profileEditButtonSelector)
-      .addEventListener("click", () => this.openPopup());
-    document
-      .querySelector(this.settings.closeButtonSelector)
-      .addEventListener("click", () => this.closeForm());
-    document
-      .querySelector(this.settings.addCardButtonSelector)
-      .addEventListener("click", () => this.openAddCard());
-    document
-      .querySelector(this.settings.closeButtonAddCardSelector)
-      .addEventListener("click", () => this.closeAddCard());
-    document
-      .querySelector(this.settings.popupCloseImageSelector)
-      .addEventListener("click", () => this.closePopupImage());
-    document.addEventListener("keydown", (evt) => this.handleKeyDown(evt));
-    this.formSection.addEventListener("click", (evt) =>
-      this.handleClickOutside(evt)
-    );
-  }
+  handleCloseEsc = (evt) => {
+    if (evt.key === "Escape") {
+      this.closeForm();
+    }
+  };
 
-  openPopup() {
+  handleCloseEscCard = (evt) => {
+    if (evt.key === "Escape") {
+      this.closeAddCard();
+    }
+  };
+
+  handleClick = (evt) => {
+    if (evt.target.classList.contains("form")) {
+      this.closeForm();
+    }
+  };
+
+  handleClickCard = (evt) => {
+    if (evt.target.id === "addcard-popud") {
+      this.closeAddCard();
+    }
+  };
+
+  openPopup = () => {
     this.formSection.classList.add("popup__opened");
     this.overlay.classList.add("overlay__visible");
-  }
+    this.formSection.addEventListener("click", this.handleClick);
+    document.addEventListener("keydown", this.handleCloseEsc);
+    this.inputName.value = this.profileNameElement.textContent;
+    this.inputAbout.value = this.profileAboutElement.textContent;
+    console.log(this.openPopup);
+  };
 
-  closeForm() {
+  closeForm = () => {
     this.formSection.classList.remove("popup__opened");
     this.overlay.classList.remove("overlay__visible");
-  }
+  };
 
-  openAddCard() {
-    document
-      .querySelector(this.settings.addCardPopupSelector)
-      .classList.add("popup__opened");
+  openAddCard = () => {
+    this.popudAddCard.classList.add("popup__opened");
     this.overlay.classList.add("overlay__visible");
-  }
+    this.popudAddCard.addEventListener("click", this.handleClickCard);
+    document.addEventListener("keydown", this.handleCloseEscCard);
+  };
 
-  closeAddCard() {
-    document
-      .querySelector(this.settings.addCardPopupSelector)
-      .classList.remove("popup__opened");
+  closeAddCard = () => {
+    this.popudAddCard.classList.remove("popup__opened");
     this.overlay.classList.remove("overlay__visible");
-  }
+  };
 
-  closePopupImage() {
-    document
-      .querySelector(this.settings.popupImageSelector)
-      .classList.remove("popup__opened");
-    this.overlay.classList.remove("overlay__visible");
-  }
+  completeFormElement = (evt) => {
+    evt.preventDefault();
 
-  handleKeyDown(evt) {
-    if (evt.key === "Escape") {
-      if (this.formSection.classList.contains("popup__opened")) {
-        this.closeForm();
-      }
-      if (
-        document
-          .querySelector(this.settings.addCardPopupSelector)
-          .classList.contains("popup__opened")
-      ) {
-        this.closeAddCard();
-      }
-      if (
-        document
-          .querySelector(this.settings.popupImageSelector)
-          .classList.contains("popup__opened")
-      ) {
-        this.closePopupImage();
-      }
+    if (
+      this.inputName.value.trim() === "" ||
+      this.inputAbout.value.trim() === ""
+    ) {
+      return;
     }
-  }
+    this.profileNameElement.textContent = this.inputName.value;
+    this.profileAboutElement.textContent = this.inputAbout.value;
+    this.closeForm();
+  };
 
-  handleClickOutside(evt) {
-    if (evt.target === this.overlay) {
-      this.closeForm();
-      this.closeAddCard();
-      this.closePopupImage();
-    }
+  setEventListeners() {
+    this.profileEditButton.addEventListener("click", this.openPopup);
+    this.closeButton.addEventListener("click", this.closeForm);
+    this.formButton.addEventListener("click", this.completeFormElement);
+    this.addCardButton.addEventListener("click", this.openAddCard);
+    this.closeButtonAddCard.addEventListener("click", this.closeAddCard);
+    console.log(this.setEventListeners);
   }
 }
