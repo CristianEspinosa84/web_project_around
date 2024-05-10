@@ -11,6 +11,8 @@ export default class Utils {
     this.formButton = settings.formButton;
     this.addCardButton = settings.addCardButton;
     this.closeButtonAddCard = settings.closeButtonAddCard;
+    this.popudAddCard = settings.popudAddCard;
+    this.addCardForm = settings.addCardForm;
   }
 
   handleCloseEsc = (evt) => {
@@ -44,7 +46,6 @@ export default class Utils {
     document.addEventListener("keydown", this.handleCloseEsc);
     this.inputName.value = this.profileNameElement.textContent;
     this.inputAbout.value = this.profileAboutElement.textContent;
-    console.log(this.openPopup);
   };
 
   closeForm = () => {
@@ -84,6 +85,5 @@ export default class Utils {
     this.formButton.addEventListener("click", this.completeFormElement);
     this.addCardButton.addEventListener("click", this.openAddCard);
     this.closeButtonAddCard.addEventListener("click", this.closeAddCard);
-    console.log(this.setEventListeners);
   }
 }
