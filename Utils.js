@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 export default class Utils {
   constructor(settings) {
     this.formSection = settings.formSection;
@@ -12,7 +14,39 @@ export default class Utils {
     this.addCardButton = settings.addCardButton;
     this.closeButtonAddCard = settings.closeButtonAddCard;
     this.popudAddCard = settings.popudAddCard;
-    this.addCardForm = settings.addCardForm;
+
+    this.popupOpenImage = settings.popupOpenImage;
+    this.cardArea = settings.cardArea;
+    // this.addCardForm = settings.addCardForm;
+    // this.addInpuntTitle = settings.addInpuntTitle;
+    // this.addInpuntUrl = settings.addInpuntUrl;
+    this.popupCloseImge = settings.popupCloseImge;
+    // this.initialCards = [
+    //   {
+    //     name: "Valle de Yosemite",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+    //   },
+    //   {
+    //     name: "Lago Louise",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+    //   },
+    //   {
+    //     name: "Montañas Calvas",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+    //   },
+    //   {
+    //     name: "Latemar",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+    //   },
+    //   {
+    //     name: "Parque Nacional de la Vanoise",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+    //   },
+    //   {
+    //     name: "Lago di Braies",
+    //     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+    //   },
+    // ];
   }
 
   handleCloseEsc = (evt) => {
@@ -47,6 +81,41 @@ export default class Utils {
     this.inputName.value = this.profileNameElement.textContent;
     this.inputAbout.value = this.profileAboutElement.textContent;
   };
+
+  openPopupImage = (link, title) => {
+    this.popupOpenImage.classList.add("popup__opened");
+    const cardTitle = this.popupOpenImage.querySelector(".popup__title");
+    const cardPicture = this.popupOpenImage.querySelector(".popup__picture");
+    cardPicture.src = link;
+    cardTitle.textContent = title;
+    cardPicture.alt = title;
+    this.overlay.classList.add("overlay__visible");
+  };
+
+  closePopupImage = () => {
+    this.popupOpenImage.classList.remove("popup__opened");
+    this.overlay.classList.remove("overlay__visible");
+  };
+
+  //   initializeCards() {
+  //     initialCards.forEach((element) => {
+  //       const newCard = new Card(element.name, element.link);
+  //       const cardElement = newCard.generateCard(this.openPopupImage);
+  //       this.cardArea.append(cardElement);
+  //     });
+  //   }
+
+  //   addCardSubmit = (evt) => {
+  //     evt.preventDefault();
+  //     const newCard = new Card(
+  //       this.addInpuntTitle.value,
+  //       this.addInpuntUrl.value
+  //     );
+  //     const cardElement = newCard.generateCard(this.openPopupImage);
+  //     this.cardArea.prepend(cardElement);
+  //     this.closeAddCard();
+  //     this.addCardForm.reset();
+  //   };
 
   closeForm = () => {
     this.formSection.classList.remove("popup__opened");
@@ -85,5 +154,10 @@ export default class Utils {
     this.formButton.addEventListener("click", this.completeFormElement);
     this.addCardButton.addEventListener("click", this.openAddCard);
     this.closeButtonAddCard.addEventListener("click", this.closeAddCard);
+    this.popupCloseImge.addEventListener("click", this.closePopupImage);
+    // this.addCardForm.addEventListener("submit", this.addCardSubmit);
+  }
+  setupCards() {
+    Card.initializeCards(this.initialCards, this.cardArea, this.openPopupImage);
   }
 }
