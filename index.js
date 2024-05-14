@@ -1,4 +1,4 @@
-// import Card from "./Card.js";
+import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import utils from "./Utils.js";
 
@@ -26,63 +26,69 @@ const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 const closedAll = document.querySelector(".page");
 
-// const initialCards = [
-//   {
-//     name: "Valle de Yosemite",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-//   },
-//   {
-//     name: "Lago Louise",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-//   },
-//   {
-//     name: "Montañas Calvas",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-//   },
-//   {
-//     name: "Latemar",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-//   },
-//   {
-//     name: "Parque Nacional de la Vanoise",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-//   },
-//   {
-//     name: "Lago di Braies",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-//   },
-// ];
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
 
-// function openPopupImage(link, title) {
-//   popupOpenImage.classList.add("popup__opened");
-//   popupOpenImage.classList.remove("popup-closed");
-//   const cardTitle = popupOpenImage.querySelector(".popup__title");
-//   const cardPicture = popupOpenImage.querySelector(".popup__picture");
-//   cardPicture.src = link;
-//   cardTitle.textContent = title;
-//   cardPicture.alt = title;
-//   overlay.classList.add("overlay__visible");
-// }
-// function closePopupImage() {
-//   popupOpenImage.classList.remove("popup__opened");
-//   popupOpenImage.classList.add("popup-closed");
-//   overlay.classList.remove("overlay__visible");
-// }
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
 
-// initialCards.forEach(function (element) {
-//   const newCard = new Card(element.name, element.link);
-//   const cardElement = newCard.generateCard(openPopupImage);
-//   cardArea.append(cardElement);
-// });
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
 
-// function addCardSubmit(evt) {
-//   evt.preventDefault();
-//   const newCard = new Card(addInpuntTitle.value, addInpuntUrl.value);
-//   const cardElement = newCard.generateCard(openPopupImage);
-//   cardArea.prepend(cardElement);
-//   settingsUtils.closeAddCard();
-//   addCardForm.reset();
-// }
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+function openPopupImage(link, title) {
+  popupOpenImage.classList.add("popup__opened");
+  popupOpenImage.classList.remove("popup-closed");
+  const cardTitle = popupOpenImage.querySelector(".popup__title");
+  const cardPicture = popupOpenImage.querySelector(".popup__picture");
+  cardPicture.src = link;
+  cardTitle.textContent = title;
+  cardPicture.alt = title;
+  overlay.classList.add("overlay__visible");
+}
+
+function closePopupImage() {
+  popupOpenImage.classList.remove("popup__opened");
+  popupOpenImage.classList.add("popup-closed");
+  overlay.classList.remove("overlay__visible");
+}
+
+initialCards.forEach(function (element) {
+  const newCard = new Card(element.name, element.link);
+  const cardElement = newCard.generateCard(openPopupImage);
+  cardArea.append(cardElement);
+});
+
+function addCardSubmit(evt) {
+  evt.preventDefault();
+  const newCard = new Card(addInpuntTitle.value, addInpuntUrl.value);
+  const cardElement = newCard.generateCard(openPopupImage);
+  cardArea.prepend(cardElement);
+  settingsUtils.closeAddCard();
+  addCardForm.reset();
+}
 
 const validationSettings = {
   formSelector: ".form__popup",
@@ -95,7 +101,6 @@ const validationSettings = {
 
 const formValidator = new FormValidator(validationSettings);
 formValidator.enableValidation();
-
 const utilsSettings = {
   formSection: formSection,
   overlay: overlay,
@@ -109,16 +114,9 @@ const utilsSettings = {
   addCardButton: addCardButton,
   closeButtonAddCard: closeButtonAddCard,
   popudAddCard: popudAddCard,
-  popupOpenImage: popupOpenImage,
-  cardArea: cardArea,
-  addCardForm: addCardForm,
-  addInpuntTitle: addInpuntTitle,
-  addInpuntUrl: addInpuntUrl,
-  popupCloseImge: popupCloseImge,
 };
 
 const settingsUtils = new utils(utilsSettings);
 settingsUtils.setEventListeners();
-
-// popupCloseImge.addEventListener("click", closePopupImage);
-// addCardForm.addEventListener("submit", addCardSubmit);
+popupCloseImge.addEventListener("click", closePopupImage);
+addCardForm.addEventListener("submit", addCardSubmit);
