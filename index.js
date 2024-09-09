@@ -1,6 +1,8 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import utils from "./Utils.js";
+import Card from "./scripts/Card.js";
+import FormValidator from "./scripts/FormValidator.js";
+import Section from "./scripts/Section.js";
+import Popup from "./scripts/Popup.js";
+import Utils from "./scripts/utils.js";
 
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
@@ -74,18 +76,49 @@ function closePopupImage() {
   popupOpenImage.classList.add("popup-closed");
   overlay.classList.remove("overlay__visible");
 }
-
-initialCards.forEach(function (element) {
-  const newCard = new Card(element.name, element.link);
-  const cardElement = newCard.generateCard(openPopupImage);
-  cardArea.append(cardElement);
+const cardList = new Section({
+  items: initialCards,
+  renderer: (element) => {
+    const newCard = new Card(element.name, element.link);
+    const cardElement = newCard.generateCard(openPopupImage);
+    cardList.addItem(cardElement);
+  },
 });
+
+cardList.renderItems();
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const profilePopup = new Popup(".form:not(#addcard-popud)");
+//   const addCardPopup = new Popup("#addcard-popud");
+
+//   profilePopup.setEventListeners();
+//   addCardPopup.setEventListeners();
+// }
+//   const utils = new Utils({
+//     profilePopup: profilePopup,
+//     addCardPopup: addCardPopup,
+//   });
+
+//   utils.setEventListeners();
+// );
+
+// const profilePopup = new Popup(".form");
+// const addCardPopup = new Popup("#addcard-popud");
+
+// profilePopup.setEventListeners();
+// addCardPopup.setEventListeners();
+
+// initialCards.forEach(function (element) {
+//   const newCard = new Card(element.name, element.link);
+//   const cardElement = newCard.generateCard(openPopupImage);
+//   cardArea.append(cardElement);
+// });
 
 function addCardSubmit(evt) {
   evt.preventDefault();
   const newCard = new Card(addInpuntTitle.value, addInpuntUrl.value);
   const cardElement = newCard.generateCard(openPopupImage);
-  cardArea.prepend(cardElement);
+  cardList.addItem(cardElement);
   settingsUtils.closeAddCard();
   addCardForm.reset();
 }
@@ -116,7 +149,14 @@ const utilsSettings = {
   popudAddCard: popudAddCard,
 };
 
-const settingsUtils = new utils(utilsSettings);
+const selectorPopup = new Popup(utilsSettings);
+selectorPopup.setEventListeners();
+
+const settingsUtils = new Utils(utilsSettings);
 settingsUtils.setEventListeners();
+settingsUtils.setPopupCloseMethod(selectorPopup.closeForm.bind(selectorPopup));
+settingsUtils.setPopupCloseMethodCard(
+  selectorPopup.closeAddCard.bind(selectorPopup)
+);
 popupCloseImge.addEventListener("click", closePopupImage);
 addCardForm.addEventListener("submit", addCardSubmit);
