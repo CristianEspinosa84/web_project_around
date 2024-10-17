@@ -1,18 +1,18 @@
-// export default class UserInfo {
-//   constructor({ nameSelector, jobSelector }) {
-//     this._nameElement = document.querySelector(nameSelector);
-//     this._jobElement = document.querySelector(jobSelector);
-//   }
+export default class UserInfo {
+  constructor({ profile__name, profile__about }) {
+    this.profile__name = document.querySelector(profile__name); // Selecciona el elemento del nombre
+    this.profile__about = document.querySelector(profile__about); // Selecciona el elemento de la ocupación
+  }
 
-//   getUserInfo() {
-//     return {
-//       name: this._nameElement.textContent,
-//       job: this._jobElement.textContent,
-//     };
-//   }
+  getUserInfo() {
+    return {
+      name: this.profile__name.textContent, // Devuelve el texto del elemento de nombre
+      about: this.profile__about.textContent, // Devuelve el texto del elemento de ocupación
+    };
+  }
 
-//   setUserInfo({ name, job }) {
-//     this._nameElement.textContent = name;
-//     this._jobElement.textContent = job;
-//   }
-// }
+  setUserInfo({ name, about }) {
+    this.profile__name.textContent = name; // Actualiza el nombre del usuario
+    this.profile__about.textContent = about; // Actualiza la ocupación del usuario
+  }
+}

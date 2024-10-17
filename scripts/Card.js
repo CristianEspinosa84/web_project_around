@@ -1,7 +1,8 @@
 export default class Card {
-  constructor(title, link, selector = ".template-card") {
+  constructor(title, link, handleCardClick, selector = ".template-card") {
     this.title = title;
     this.link = link;
+    this.handleCardClick = handleCardClick;
     this.templateCard = document.querySelector(selector);
   }
 
@@ -25,7 +26,7 @@ export default class Card {
     this.cardImage = cardImage;
   }
 
-  _setEvenListenders() {
+  _setEventListenders() {
     this.likebutton.addEventListener("click", () => {
       this.likebutton.classList.toggle("element__like-black");
     });
@@ -35,15 +36,14 @@ export default class Card {
     });
 
     this.cardImage.addEventListener("click", () => {
-      this.openPopupImage(this.link, this.title);
+      this.handleCardClick(this.link, this.title);
     });
   }
 
-  generateCard(openPopupImage) {
-    this.openPopupImage = openPopupImage;
+  generateCard() {
     this._getCardClone();
     this._setProperties();
-    this._setEvenListenders();
+    this._setEventListenders();
     return this.card;
   }
 }
