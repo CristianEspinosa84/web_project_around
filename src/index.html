@@ -15,11 +15,8 @@
         <form class="form__popup" autocomplete="off" novalidate>
           <h2 class="form__title">Edit profile</h2>
           <a href="#">
-            <img
-              src="../src/Image/CloseIcon.jpg"
-              alt="imageclose"
-              class="form__close"
-            />
+            <img src=<%=require("../src/Images/CloseIcon.jpg")%>
+            alt="imageclose" class="form__close" />
           </a>
 
           <input
@@ -59,12 +56,8 @@
         >
           <h2 class="form__title">Nuevo Lugar</h2>
           <a href="#">
-            <img
-              src="../src/Image/CloseIcon.jpg"
-              alt="imageclose"
-              class="form__close"
-              id="addcard-close"
-            />
+            <img src=<%=require("../src/Images/CloseIcon.jpg")%>
+            alt="imageclose" class="form__close" id="addcard-close" />
           </a>
 
           <input
@@ -94,36 +87,28 @@
       </div>
 
       <div class="form popup popup-closed" id="popup__image">
-        <img
-          src="../src/Image/CloseIcon.jpg"
-          alt="imageclose"
-          class="popup__close"
-        />
+        <img src=<%=require("../src/Images/CloseIcon.jpg")%> alt="imageclose"
+        class="popup__close" />
         <img class="popup__picture" src="#" alt="#" />
         <h3 class="popup__title"></h3>
       </div>
 
       <div class="overlay"></div>
       <header class="header">
-        <img src="./Images/Vector.jpg" alt="imagelogo" class="header__logo" />
+        <img src=<%=require("../src/Images/Vector.jpg")%> alt="imagelogo"
+        class="header__logo" />
         <hr class="header__line" />
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="../src/Image/JacquesCousteau.jpg"
-            alt="imageprofile"
-            class="profile__image"
-          />
+          <img src=<%=require("../src/Images/JacquesCousteau.jpg")%>
+          alt="imageprofile" class="profile__image" />
           <div class="profile__content">
             <div class="profile__user">
               <h2 class="profile__name">Jacques Cousteau</h2>
               <a>
-                <img
-                  src="../src/Image/EditButton.jpg"
-                  alt="imageedit"
-                  class="profile__edit"
-                />
+                <img src=<%=require("../src/Images/EditButton.jpg")%>
+                alt="imageedit" class="profile__edit" />
               </a>
             </div>
             <p class="profile__about">Explorer</p>

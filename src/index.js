@@ -5,6 +5,7 @@ import Utils from "./scripts/utils.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import UserInfo from "./scripts/UserInfo.js";
+import "./styles/index.css";
 
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
