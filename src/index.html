@@ -6,7 +6,7 @@
     <meta name="description" content="Around the U.S." />
     <meta name="keywords" content=" the US" />
     <meta name="author" content="Cristia Espinosa" />
-    <link rel="stylesheet" href="./Pages/index.css" />
+    <!-- <link rel="stylesheet" href="./Pages/index.css" /> -->
     <title>Document</title>
   </head>
   <body>
@@ -16,7 +16,7 @@
           <h2 class="form__title">Edit profile</h2>
           <a href="#">
             <img
-              src="./Images/CloseIcon.jpg"
+              src="../src/Image/CloseIcon.jpg"
               alt="imageclose"
               class="form__close"
             />
@@ -29,6 +29,7 @@
             required
             minlength="2"
             maxlength="40"
+            name="name"
           />
 
           <span class="form__error name-error"></span>
@@ -40,6 +41,7 @@
             required
             minlength="2"
             maxlength="40"
+            name="about"
           />
 
           <span class="form__error about-error"></span>
@@ -58,7 +60,7 @@
           <h2 class="form__title">Nuevo Lugar</h2>
           <a href="#">
             <img
-              src="./Images/CloseIcon.jpg"
+              src="../src/Image/CloseIcon.jpg"
               alt="imageclose"
               class="form__close"
               id="addcard-close"
@@ -73,6 +75,7 @@
             required
             minlength="2"
             maxlength="10"
+            name="title"
           />
           <span class="form__error addcard-title-error"></span>
 
@@ -82,6 +85,7 @@
             placeholder="Enlace a la imagen"
             id="addcard-url"
             required
+            name="link"
           />
           <span class="form__error addcard-url-error"></span>
 
@@ -91,7 +95,7 @@
 
       <div class="form popup popup-closed" id="popup__image">
         <img
-          src="./Images/CloseIcon.jpg"
+          src="../src/Image/CloseIcon.jpg"
           alt="imageclose"
           class="popup__close"
         />
@@ -107,7 +111,7 @@
       <main class="content">
         <section class="profile">
           <img
-            src="./Images/JacquesCousteau.jpg"
+            src="../src/Image/JacquesCousteau.jpg"
             alt="imageprofile"
             class="profile__image"
           />
@@ -116,7 +120,7 @@
               <h2 class="profile__name">Jacques Cousteau</h2>
               <a>
                 <img
-                  src="./Images/EditButton.jpg"
+                  src="../src/Image/EditButton.jpg"
                   alt="imageedit"
                   class="profile__edit"
                 />
@@ -146,6 +150,6 @@
       </div>
     </template>
 
-    <script src="./index.js" type="module"></script>
+    <!-- <script src="./index.js" type="module"></script> -->
   </body>
 </html>
