@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Around the U.S." />
+    <meta name="keywords" content=" the US" />
+    <meta name="author" content="Cristia Espinosa" />
+    <title>Document</title>
+  <script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+  <body>
+    <div class="page">
+      <div class="form closed-window" id="profile__popup">
+        <form class="form__popup" autocomplete="off" novalidate>
+          <h2 class="form__title">Edit profile</h2>
+          <a href="#">
+            <img src=69749d0e4e2c6170f8e5.jpg
+            alt="imageclose" class="form__close" />
+          </a>
+
+          <input
+            type="text"
+            id="name"
+            class="form__input form__name"
+            required
+            minlength="2"
+            maxlength="40"
+            name="name"
+          />
+
+          <span class="form__error name-error"></span>
+
+          <input
+            type="text"
+            id="about"
+            class="form__input form__about"
+            required
+            minlength="2"
+            maxlength="40"
+            name="about"
+          />
+
+          <span class="form__error about-error"></span>
+
+          <button class="form__button" id="save">Guardar</button>
+        </form>
+      </div>
+
+      <div class="form closed-window" id="addcard-popud">
+        <form
+          class="form__popup"
+          id="addcard-form"
+          autocomplete="off"
+          novalidate
+        >
+          <h2 class="form__title">Nuevo Lugar</h2>
+          <a href="#">
+            <img src=69749d0e4e2c6170f8e5.jpg
+            alt="imageclose" class="form__close" id="addcard-close" />
+          </a>
+
+          <input
+            type="text"
+            class="form__name form__input"
+            placeholder="Titulo"
+            id="addcard-title"
+            required
+            minlength="2"
+            maxlength="10"
+            name="title"
+          />
+          <span class="form__error addcard-title-error"></span>
+
+          <input
+            type="url"
+            class="form__about form__input"
+            placeholder="Enlace a la imagen"
+            id="addcard-url"
+            required
+            name="link"
+          />
+          <span class="form__error addcard-url-error"></span>
+
+          <button class="form__button" id="addcard-button">crear</button>
+        </form>
+      </div>
+
+      <div class="form popup popup-closed" id="popup__image">
+        <img src=69749d0e4e2c6170f8e5.jpg alt="imageclose"
+        class="popup__close" />
+        <img class="popup__picture" src="#" alt="#" />
+        <h3 class="popup__title"></h3>
+      </div>
+
+      <div class="overlay"></div>
+      <header class="header">
+        <img src=3708983c8ea77986ccae.jpg alt="imagelogo"
+        class="header__logo" />
+        <hr class="header__line" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img src=a989dd175d40e4f0fce4.jpg
+          alt="imageprofile" class="profile__image" />
+          <div class="profile__content">
+            <div class="profile__user">
+              <h2 class="profile__name">Jacques Cousteau</h2>
+              <a>
+                <img src=3588e0189b6cf7bf12e4.jpg
+                alt="imageedit" class="profile__edit" />
+              </a>
+            </div>
+            <p class="profile__about">Explorer</p>
+          </div>
+          <p class="profile__button">+</p>
+        </section>
+
+        <div class="elements"></div>
+      </main>
+
+      <footer class="footer">
+        <h2 class="footer__copyright">© 2020 Around The U.S.</h2>
+      </footer>
+    </div>
+
+    <template class="template-card">
+      <div class="element">
+        <img src="#" alt="#" class="element__image" />
+        <div class="element__info">
+          <button class="element__trash"></button>
+          <h2 class="element__title"></h2>
+          <button class="element__like"></button>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>
