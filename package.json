@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "gh-pages": "^6.2.0",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",

@@ -1,10 +1,22 @@
 import Popup from "./Popup.js";
+
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit; // Callback para manejar el envío del formulario
     this._form = this._popup.querySelector(".form__popup"); // Selecciona el formulario dentro del popup
     this._inputList = this._form.querySelectorAll("input"); // Selecciona todos los inputs del formulario
+    this._submitButton = this._form.querySelector(".form__button"); // Selecciona el botón de envío
+    this._submitButtonText = this._submitButton.textContent; // Guarda el texto original del botón
+  }
+
+  // Método para cambiar el texto del botón de envío
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Guardando..."; // Cambia el texto mientras se carga
+    } else {
+      this._submitButton.textContent = this._submitButtonText; // Restaura el texto original
+    }
   }
 
   // Recopila los valores de los campos de entrada

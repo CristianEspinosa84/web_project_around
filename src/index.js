@@ -63,8 +63,61 @@ const initialCards = [
   },
 ];
 
+// Instancia de la clase Api
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-42",
+  headers: {
+    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6", // Añadir el token aquí
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    cards.forEach((card) => {
+      cardList.addItem(card); // Añade cada tarjeta desde los datos del servidor
+    });
+    cardList.addItem(); // Renderiza todas las tarjetas en el DOM
+  })
+  .catch((err) =>
+    console.log(`Error al cargar las tarjetas iniciales: ${err}`)
+  );
+
 function handleCardClick(link, title) {
   popupWithImage.open(link, title); // Abre el popup de imagen con el link y título
+}
+
+function handleLikeClick(card) {
+  // Verifica si el usuario ya ha dado "me gusta"
+  const isLiked = card.likes.some((like) => like._id === "userId"); // Reemplaza 'userId' con el ID del usuario autenticado
+
+  if (isLiked) {
+    // Si ya tiene "me gusta", elimina el "me gusta"
+    api
+      .dislikeCard(card.cardId)
+      .then((updatedCardData) => {
+        card.updateLikes(updatedCardData.likes); // Actualiza los "me gusta" en la interfaz
+      })
+      .catch((err) => console.log(`Error al quitar "me gusta": ${err}`));
+  } else {
+    // Si no tiene "me gusta", añade el "me gusta"
+    api
+      .likeCard(card.cardId)
+      .then((updatedCardData) => {
+        card.updateLikes(updatedCardData.likes); // Actualiza los "me gusta" en la interfaz
+      })
+      .catch((err) => console.log(`Error al dar "me gusta": ${err}`));
+  }
+}
+
+function handleDeleteClick(card) {
+  api
+    .deleteCard(card.cardId)
+    .then(() => {
+      card.card.remove(); // Elimina la tarjeta del DOM
+    })
+    .catch((err) => console.log(`Error al eliminar la tarjeta: ${err}`));
 }
 
 const popupWithImage = new PopupWithImage("#popup__image");
@@ -74,7 +127,15 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (element) => {
-      const newCard = new Card(element.name, element.link, handleCardClick);
+      const newCard = new Card(
+        element.name, // Nombre de la tarjeta
+        element.link, // Enlace de la imagen
+        element.likes, // "Me gusta" iniciales
+        element._id, // ID único de la tarjeta
+        handleLikeClick, // Función para manejar el "me gusta"
+        handleCardClick, // Función para manejar el click en la imagen
+        handleDeleteClick // Agrega la función de eliminar tarjeta
+      );
       const cardElement = newCard.generateCard();
       cardList.addItem(cardElement);
     },
@@ -84,14 +145,24 @@ const cardList = new Section(
 
 cardList.renderItems();
 
-function addCardSubmit(formData) {
-  // Crear la tarjeta utilizando los datos del formulario
-  const newCard = new Card(formData.title, formData.link, handleCardClick);
-  const cardElement = newCard.generateCard();
-  cardList.addItem(cardElement);
+function addCardSubmit({ title, link }) {
+  addCardPopup.renderLoading(true); // Cambia el botón a "Guardando..."
 
-  // Cierra el popup y reinicia el formulario
-  addCardPopup.close(); // Cambiado a cerrar el popup de añadir tarjeta directamente
+  api
+    .addNewCard(title, link) // Envía la tarjeta al servidor
+    .then((newCardData) => {
+      const cardElement = new Card(
+        newCardData.name,
+        newCardData.link,
+        handleCardClick
+      ).generateCard();
+      cardList.addItem(cardElement); // Añade la tarjeta confirmada al DOM
+      addCardPopup.close(); // Cierra el popup
+    })
+    .catch((err) => console.log(`Error al añadir la tarjeta: ${err}`))
+    .finally(() => {
+      addCardPopup.renderLoading(false); // Restaura el texto del botón
+    });
 }
 
 const validationSettings = {
@@ -129,9 +200,38 @@ const userInfo = new UserInfo({
   profile__about: ".profile__about",
 });
 
+// Obtener y renderizar la información del usuario desde el servidor
+api
+  .getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+    });
+  })
+  .catch((err) =>
+    console.log(`Error al obtener la información del usuario: ${err}`)
+  );
+
 function handleProfileFormSubmit({ name, about }) {
-  userInfo.setUserInfo({ name, about });
+  editProfilePopup.renderLoading(true); // Cambia el botón a "Guardando..."
+  api
+    .updateUserProfile(name, about) // Llama a la API para actualizar el perfil
+    .then((updatedData) => {
+      userInfo.setUserInfo({
+        // Actualiza el DOM con los datos del servidor
+        name: updatedData.name,
+        about: updatedData.about,
+      });
+      editProfilePopup.close(); // Cierra el formulario una vez actualizado
+    })
+    .catch((err) => console.log(`Error al actualizar el perfil: ${err}`))
+    .finally(() => {
+      editProfilePopup.renderLoading(false); // Restaura el texto del botón
+    });
 }
+
+// Instancia del popup de edición de perfil
 
 const editProfilePopup = new PopupWithForm(
   "#profile__popup",
@@ -140,6 +240,14 @@ const editProfilePopup = new PopupWithForm(
 editProfilePopup.setEventListeners();
 
 profileEditButton.addEventListener("click", () => {
+  editProfilePopup.open();
+});
+
+// Evento para abrir el popup de edición de perfil
+profileEditButton.addEventListener("click", () => {
+  const { name, about } = userInfo.getUserInfo();
+  inputName.value = name;
+  inputAbout.value = about;
   editProfilePopup.open();
 });
 
