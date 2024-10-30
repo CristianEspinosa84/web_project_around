@@ -1,8 +1,16 @@
 export default class Card {
-  constructor(title, link, handleCardClick, selector = ".template-card") {
+  constructor(title, link,{_id, likes, owner}, currentUser, 
+    handleCardClick, 
+    handleDeleteCard,
+    selector = ".template-card") {
     this.title = title;
     this.link = link;
+    this.likes = likes;
+    this.owner = owner;
+    this._id = _id;
+    this.currentUser = currentUser;
     this.handleCardClick = handleCardClick;
+    this.handleDeleteCard = handleDeleteCard;
     this.templateCard = document.querySelector(selector);
   }
 
@@ -24,6 +32,16 @@ export default class Card {
     this.likebutton = likebutton;
     this.trashButton = trashButton;
     this.cardImage = cardImage;
+
+    //el usuario es igual al dueño??
+    if(this.owner._id !== this.currentUser._id){
+      trashButton.style.display = 'none'
+    }
+
+    // el usaurio actual le dio like??
+    if(this.likes.some(like => like._id === this.currentUser._id)){
+      likebutton.classList.add("element__like-black");
+    }
   }
 
   _setEventListenders() {
@@ -32,7 +50,9 @@ export default class Card {
     });
 
     this.trashButton.addEventListener("click", () => {
-      this.card.remove();
+      this.handleDeleteCard(this._id, () => {
+        this.card.remove();
+      })
     });
 
     this.cardImage.addEventListener("click", () => {

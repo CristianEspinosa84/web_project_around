@@ -6,6 +6,7 @@ import PopupWithForm from "./scripts/PopupWithForm.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import UserInfo from "./scripts/UserInfo.js";
 import "./styles/index.css";
+import { api } from "./scripts/Api.js";
 
 const overlay = document.querySelector(".overlay");
 const profilSelection = document.querySelector(".profile");
@@ -67,28 +68,68 @@ function handleCardClick(link, title) {
   popupWithImage.open(link, title); // Abre el popup de imagen con el link y título
 }
 
+function handleDeleteCard(cardId, callback){
+
+  //con popup
+  /*popupWithConfirmation().open(() => {
+    return api.deleteCard(cardId).then(() => {
+      callback()
+    })
+    })
+    */
+   //directo sin popup
+ /* return api.deleteCard(cardId).then(() => {
+    callback()
+  })
+    */
+}
+
 const popupWithImage = new PopupWithImage("#popup__image");
 popupWithImage.setEventListeners();
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (element) => {
-      const newCard = new Card(element.name, element.link, handleCardClick);
-      const cardElement = newCard.generateCard();
-      cardList.addItem(cardElement);
-    },
-  },
-  ".elements"
-);
+let cardList = null;
+let currentUser = null;
 
-cardList.renderItems();
+// Instancia para editar perfil
+const userInfo = new UserInfo({
+  profile__name: ".profile__name",
+  profile__about: ".profile__about",
+});
+
+api.getUserInfo().then((user) => {
+  userInfo.setUserInfo(user);
+  currentUser = user;
+  api.getCards().then((cards) => {
+    cardList = new Section(
+      {
+        items: cards,
+        renderer: (element) => {
+          const newCard = new Card(
+            element.name,
+            element.link,
+            element,
+            currentUser,
+            handleCardClick,
+            handleDeleteCard
+          );
+          const cardElement = newCard.generateCard();
+          cardList.addItem(cardElement);
+        },
+      },
+      ".elements"
+    );
+
+    cardList.renderItems();
+  });
+});
 
 function addCardSubmit(formData) {
   // Crear la tarjeta utilizando los datos del formulario
-  const newCard = new Card(formData.title, formData.link, handleCardClick);
-  const cardElement = newCard.generateCard();
-  cardList.addItem(cardElement);
+  api.saveCard(formData.title, formData.link).then((card) => {
+    const newCard = new Card(card.name, card.link,card, currentUser, handleCardClick);
+    const cardElement = newCard.generateCard();
+    cardList.addItem(cardElement);
+  });
 
   // Cierra el popup y reinicia el formulario
   addCardPopup.close(); // Cambiado a cerrar el popup de añadir tarjeta directamente
@@ -122,12 +163,6 @@ const utilsSettings = {
   imagePopupSelector: "#popup__image",
   profilePopupSelector: "#profile-popup",
 };
-
-// Instancia para editar perfil
-const userInfo = new UserInfo({
-  profile__name: ".profile__name",
-  profile__about: ".profile__about",
-});
 
 function handleProfileFormSubmit({ name, about }) {
   userInfo.setUserInfo({ name, about });
