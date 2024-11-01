@@ -2,8 +2,8 @@ export default class Card {
   constructor(
     title,
     link,
-    likes,
-    cardId,
+    { likes, owner, _id },
+    currentUser,
     handleLikeClick,
     handleCardClick,
     handleDeleteClick, // Agregamos handleDeleteClick para manejar la eliminación
@@ -12,7 +12,10 @@ export default class Card {
     this.title = title;
     this.link = link;
     this.likes = likes; // Número de "me gusta" iniciales
-    this.cardId = cardId; // ID de la tarjeta en el servidor
+    // this.cardId = cardId; // ID de la tarjeta en el servidor
+    this._id = _id;
+    this.owner = owner;
+    this.currentUser = currentUser;
     this.handleLikeClick = handleLikeClick;
     this.handleCardClick = handleCardClick;
     this.handleDeleteClick = handleDeleteClick; // Asignamos handleDeleteClick
@@ -42,6 +45,16 @@ export default class Card {
     this.trashButton = trashButton;
     this.cardImage = cardImage;
     this.likeCounter = likeCounter;
+
+    // Muestra el icono de eliminación solo si el usuario es el dueño de la tarjeta
+    if (this.owner._id !== this.currentUser._id) {
+      trashButton.style.display = "none";
+    }
+
+    // Marca "me gusta" si el usuario actual ya ha dado "me gusta"
+    if (this.likes.some((like) => like._id === this.currentUser._id)) {
+      likeButton.classList.add("element__like-black");
+    }
   }
 
   _setEventListeners() {

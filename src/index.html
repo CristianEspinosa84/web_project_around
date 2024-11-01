@@ -92,8 +92,8 @@
         <h3 class="popup__title"></h3>
       </div>
 
-      <div class="form closed-window" id="popup__confimation">
-        <div class="confirnation__popup">
+      <div class="form closed-window" id="popup__confirmation">
+        <div class="confirmation__popup form__popup">
           <h2 class="form__title">¿Estás seguro/a?</h2>
           <a href="#">
             <img src=<%=require("../src/Images/CloseIcon.jpg")%>
@@ -104,7 +104,7 @@
       </div>
 
       <div class="form closed-window" id="popup__edit-photo">
-        <form class="form__popup" autocomplete="off" novalidate>
+        <form class="edit__popup form__popup" autocomplete="off" novalidate>
           <h2 class="form__title">Cambiar foto de perfil</h2>
           <a href="#">
             <img src=<%=require("../src/Images/CloseIcon.jpg")%> alt="Cerrar
@@ -133,8 +133,13 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img src=<%=require("../src/Images/JacquesCousteau.jpg")%>
-          alt="imageprofile" class="profile__image" />
+          <div class="profile__avatar-container">
+            <img src=<%=require("../src/Images/JacquesCousteau.jpg")%>
+            alt="imageprofile" class="profile__image" />
+            <div class="profile__edit-icon"></div>
+            <!-- Icono de edición en la foto de perfil -->
+          </div>
+
           <div class="profile__content">
             <div class="profile__user">
               <h2 class="profile__name">Jacques Cousteau</h2>

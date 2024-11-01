@@ -35,6 +35,26 @@
   height: 313px;
 }
 
+.confirmation__popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 430px;
+  height: 181px;
+}
+
+.edit__popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 430px;
+  height: 272px;
+}
+
 .form__title {
   font-family: Inter;
   font-size: 24px;

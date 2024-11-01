@@ -22,8 +22,15 @@ export default class Api {
   // Obtener las tarjetas iniciales
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-    }).then(this._checkResponse);
+      headers: {
+        Authorization: this._headers,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   // Actualizar perfil del usuario
@@ -68,12 +75,19 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  // Actualizar imagen de perfil
-  updateAvatar(avatar) {
+  // Método para actualizar el avatar del usuario
+  updateUserAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar }),
-    }).then(this._checkResponse);
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 }

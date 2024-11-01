@@ -29,13 +29,16 @@ export default class Popup {
     const closeButton =
       this._popup.querySelector(".popup__close") ||
       this._popup.querySelector(".form__close");
-    closeButton.addEventListener("click", () => this.close());
 
-    // Cierra el popup al hacer clic fuera del formulario (en el área sombreada del popup o en el overlay)
-    this._popup.addEventListener("click", (event) => {
-      if (event.target === this._popup || event.target === this._overlay) {
-        this.close();
-      }
-    });
+    if (closeButton) {
+      closeButton.addEventListener("click", () => this.close());
+
+      // Cierra el popup al hacer clic fuera del formulario (en el área sombreada del popup o en el overlay)
+      this._popup.addEventListener("click", (event) => {
+        if (event.target === this._popup || event.target === this._overlay) {
+          this.close();
+        }
+      });
+    }
   }
 }
