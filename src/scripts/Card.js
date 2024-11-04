@@ -2,7 +2,7 @@ export default class Card {
   constructor(
     title,
     link,
-    { likes, owner, _id },
+    { likes, _id, owner },
     currentUser,
     handleLikeClick,
     handleCardClick,
@@ -12,10 +12,9 @@ export default class Card {
     this.title = title;
     this.link = link;
     this.likes = likes; // Número de "me gusta" iniciales
-    // this.cardId = cardId; // ID de la tarjeta en el servidor
-    this._id = _id;
-    this.owner = owner;
-    this.currentUser = currentUser;
+    this._id = _id; // ID de la tarjeta en el servidor
+    this.owner = owner; // Guardamos la información del propietario
+    this.currentUser = currentUser; // Propiedad currentUser que representa al usuario actual
     this.handleLikeClick = handleLikeClick;
     this.handleCardClick = handleCardClick;
     this.handleDeleteClick = handleDeleteClick; // Asignamos handleDeleteClick
@@ -39,7 +38,7 @@ export default class Card {
     cardImage.src = this.link;
     cardImage.alt = this.title;
     cardTitle.textContent = this.title;
-    likeCounter.textContent = this.likes.length; // Muestra el número inicial de "me gusta"
+    // likeCounter.textContent = this.likes.length; // Muestra el número inicial de "me gusta"
 
     this.likeButton = likeButton;
     this.trashButton = trashButton;
@@ -77,7 +76,7 @@ export default class Card {
     this.likeCounter.textContent = this.likes.length;
     this.likeButton.classList.toggle(
       "element__like-black",
-      this.likes.some((like) => like._id === "userId")
+      this.likes.some((like) => like._id === this.currentUser._id)
     ); // Añade o quita el color según el estado del "me gusta"
   }
 

@@ -20,6 +20,7 @@ const inputName = document.querySelector(".form__name");
 const inputAbout = document.querySelector(".form__about");
 const inputElement = document.querySelector(".form__input");
 const closeButton = formSection.querySelector(".form__close");
+const closeButtonConfirmatio = document.querySelector(".confirmation__close");
 const formButton = document.querySelector(".form__button");
 const addCardButton = document.querySelector(".profile__button");
 const popudAddCard = document.querySelector("#addcard-popud");
@@ -57,6 +58,8 @@ api
       name: data.name,
       about: data.about,
       avatar: data.avatar,
+      link: data.link,
+      cardId: data.cardId,
       id: data._id,
     });
   })
@@ -101,7 +104,7 @@ function handleDeleteClick(card) {
   popupWithConfirmation.open();
   popupWithConfirmation.setSubmitAction(() => {
     api
-      .deleteCard(card.cardId)
+      .deleteCard(card._id)
       .then(() => {
         card.remove();
         popupWithConfirmation.close();
@@ -110,33 +113,37 @@ function handleDeleteClick(card) {
   });
 }
 
-// Instancia de la clase Section para renderizar las tarjetas
-const cardList = new Section(
-  {
-    items: [],
-    renderer: (element) => {
-      const newCard = new Card(
-        element.name,
-        element.link,
-        element.likes,
-        // element._id,
-        currentUser,
-        handleLikeClick,
-        handleCardClick,
-        handleDeleteClick
-      );
-      const cardElement = newCard.generateCard();
-      cardList.addItem(cardElement);
-    },
-  },
-  ".elements"
-);
-
 //Cargar las tarjetas iniciales desde el servidor
 api
   .getInitialCards()
   .then((cards) => {
-    cardList.setItems(cards); // Asigna las tarjetas obtenidas
+    console.log(cards);
+    const cardList = new Section(
+      {
+        items: cards,
+        renderer: (element) => {
+          console.log("Renderizando tarjeta:", element);
+          const newCard = new Card(
+            {
+              name: element.name,
+              link: element.link,
+              likes: element.likes,
+              _id: element._id,
+              owner: element.owner,
+            },
+            userInfo.getUserId(), // ID del usuario actual
+            handleLikeClick,
+            handleCardClick,
+            handleDeleteClick
+          );
+          const cardElement = newCard.generateCard();
+          cardList.addItem(cardElement);
+        },
+      },
+      ".elements"
+    );
+
+    // cardList.setItems(cards); // Asigna las tarjetas obtenidas
     cardList.renderItems(); // Renderiza todas las tarjetas en el DOM
   })
   .catch((err) =>
@@ -155,6 +162,8 @@ function addCardSubmit({ title, link }) {
         newCardData.link,
         newCardData.likes,
         newCardData._id,
+        newCardData.owner,
+        newCardData.currentUser,
         handleLikeClick,
         handleCardClick,
         handleDeleteClick
@@ -254,6 +263,7 @@ const utilsSettings = {
   profileAboutElement: profileAboutElement,
   profileEditButton: profileEditButton,
   closeButton: closeButton,
+  closeButtonConfirmatio: closeButtonConfirmatio,
   formButton: formButton,
   addCardButton: addCardButton,
   closeButtonAddCard: closeButtonAddCard,

@@ -34,6 +34,7 @@ export default class FormValidator {
     const submitButton = formPopup.querySelector(
       this.settings.submitButtonSelector
     );
+    if (!submitButton) return; // Si no hay botón, salir de la función
     const inputList = formPopup.querySelectorAll(this.settings.inputSelector);
     const allValid = Array.from(inputList).every(
       (input) => input.validity.valid

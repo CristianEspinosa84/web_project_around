@@ -3,7 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._confirmButton = this._popup.querySelector(".form__button"); // Selecciona el botón de confirmación dentro del popup
+    this._confirmButton = this._popup.querySelector(".confirmation__button"); // Selecciona el botón de confirmación dentro del popup
   }
 
   setSubmitAction(action) {
