@@ -11,7 +11,7 @@ export default class Card {
   ) {
     this.title = title;
     this.link = link;
-    this.likes = likes; // Número de "me gusta" iniciales
+    this.likes = likes || []; // Número de "me gusta" iniciales
     this._id = _id; // ID de la tarjeta en el servidor
     this.owner = owner; // Guardamos la información del propietario
     this.currentUser = currentUser; // Propiedad currentUser que representa al usuario actual
@@ -34,11 +34,17 @@ export default class Card {
     const likeButton = this.card.querySelector(".element__like");
     const trashButton = this.card.querySelector(".element__trash");
     const likeCounter = this.card.querySelector(".element__like-counter"); // Contador de "me gusta"
+    if (likeCounter) {
+      this.likeCounter = likeCounter;
+      this.likeCounter.textContent = this.likes.length; // Esto muestra el número de "me gusta"
+    }
 
     cardImage.src = this.link;
     cardImage.alt = this.title;
     cardTitle.textContent = this.title;
     // likeCounter.textContent = this.likes.length; // Muestra el número inicial de "me gusta"
+    // const isLiked = likes.some((like) => like._id === this.currentUser._id);
+    // this.likeButton.classList.toggle("element__like-black", isLiked); // Cambia el color del botón de "me gusta"
 
     this.likeButton = likeButton;
     this.trashButton = trashButton;
@@ -52,7 +58,7 @@ export default class Card {
 
     // Marca "me gusta" si el usuario actual ya ha dado "me gusta"
     if (this.likes.some((like) => like._id === this.currentUser._id)) {
-      likeButton.classList.add("element__like-black");
+      likeButton.classList.add(".element__like-black");
     }
   }
 
@@ -73,9 +79,10 @@ export default class Card {
 
   updateLikes(likes) {
     this.likes = likes;
+    console.log("Actualizando likes:", likes);
     this.likeCounter.textContent = this.likes.length;
     this.likeButton.classList.toggle(
-      "element__like-black",
+      ".element__like-black",
       this.likes.some((like) => like._id === this.currentUser._id)
     ); // Añade o quita el color según el estado del "me gusta"
   }

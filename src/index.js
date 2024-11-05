@@ -62,6 +62,43 @@ api
       cardId: data.cardId,
       id: data._id,
     });
+
+    //Cargar las tarjetas iniciales desde el servidor
+    api
+      .getInitialCards()
+      .then((cards) => {
+        console.log(cards);
+        const cardList = new Section(
+          {
+            items: cards,
+            renderer: (element) => {
+              const newCard = new Card(
+                element.name,
+                element.link,
+
+                {
+                  likes: element.likes,
+                  _id: element._id,
+                  owner: element.owner,
+                },
+                userInfo.getUserId(), // ID del usuario actual
+                handleLikeClick,
+                handleCardClick,
+                handleDeleteClick
+              );
+              const cardElement = newCard.generateCard();
+              cardList.addItem(cardElement);
+            },
+          },
+          ".elements"
+        );
+
+        // cardList.setItems(cards); // Asigna las tarjetas obtenidas
+        cardList.renderItems(); // Renderiza todas las tarjetas en el DOM
+      })
+      .catch((err) =>
+        console.log(`Error al cargar las tarjetas iniciales: ${err}`)
+      );
   })
   .catch((err) =>
     console.log(`Error al obtener la información del usuario: ${err}`)
@@ -78,17 +115,16 @@ function handleCardClick(link, title) {
 // Función para manejar los "me gusta" en las tarjetas
 function handleLikeClick(card) {
   const isLiked = card.likes.some((like) => like._id === userInfo.getUserId());
-
   if (isLiked) {
     api
-      .dislikeCard(card.cardId)
+      .dislikeCard(card._id)
       .then((updatedCardData) => {
         card.updateLikes(updatedCardData.likes);
       })
       .catch((err) => console.log(`Error al quitar "me gusta": ${err}`));
   } else {
     api
-      .likeCard(card.cardId)
+      .likeCard(card._id)
       .then((updatedCardData) => {
         card.updateLikes(updatedCardData.likes);
       })
@@ -113,43 +149,6 @@ function handleDeleteClick(card) {
   });
 }
 
-//Cargar las tarjetas iniciales desde el servidor
-api
-  .getInitialCards()
-  .then((cards) => {
-    console.log(cards);
-    const cardList = new Section(
-      {
-        items: cards,
-        renderer: (element) => {
-          console.log("Renderizando tarjeta:", element);
-          const newCard = new Card(
-            {
-              name: element.name,
-              link: element.link,
-              likes: element.likes,
-              _id: element._id,
-              owner: element.owner,
-            },
-            userInfo.getUserId(), // ID del usuario actual
-            handleLikeClick,
-            handleCardClick,
-            handleDeleteClick
-          );
-          const cardElement = newCard.generateCard();
-          cardList.addItem(cardElement);
-        },
-      },
-      ".elements"
-    );
-
-    // cardList.setItems(cards); // Asigna las tarjetas obtenidas
-    cardList.renderItems(); // Renderiza todas las tarjetas en el DOM
-  })
-  .catch((err) =>
-    console.log(`Error al cargar las tarjetas iniciales: ${err}`)
-  );
-
 // Función para añadir una nueva tarjeta
 function addCardSubmit({ title, link }) {
   addCardPopup.renderLoading(true);
@@ -160,9 +159,11 @@ function addCardSubmit({ title, link }) {
       const cardElement = new Card(
         newCardData.name,
         newCardData.link,
-        newCardData.likes,
-        newCardData._id,
-        newCardData.owner,
+        {
+          links: newCardData.likes,
+          _id: newCardData._id,
+          owner: newCardData.owner,
+        },
         newCardData.currentUser,
         handleLikeClick,
         handleCardClick,
@@ -223,7 +224,8 @@ function handleAvatarFormSubmit({ avatar }) {
   api
     .updateUserAvatar(avatar)
     .then((updatedData) => {
-      userInfo.setUserInfo({ avatar: updatedData.avatar });
+      // userInfo.setUserInfo({ avatar: updatedData.avatar });
+      userInfo.setUserAvatar({ avatar: updatedData.avatar });
       editPhotoPopup.close();
     })
     .catch((err) => console.log(`Error al actualizar el avatar: ${err}`))

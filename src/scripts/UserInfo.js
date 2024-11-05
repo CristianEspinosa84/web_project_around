@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ profile__name, profile__about }) {
+  constructor({ profile__name, profile__about, profile__image }) {
     this.profile__name = document.querySelector(profile__name); // Selecciona el elemento del nombre
     this.profile__about = document.querySelector(profile__about); // Selecciona el elemento de la ocupación
+    this.profile__image = document.querySelector(profile__image);
     this._id = null; // Inicializa la propiedad userId
   }
 
@@ -13,15 +14,17 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ name, about }) {
+  setUserAvatar({ avatar }) {
+    this.profile__image.src = avatar;
+  }
+
+  setUserInfo({ name, about, id }) {
     this.profile__name.textContent = name; // Actualiza el nombre del usuario
     this.profile__about.textContent = about; // Actualiza la ocupación del usuario
     this._id = id; // Guarda el ID del usuario
   }
 
   getUserId() {
-    console.log("ID del usuario actual:", UserInfo.getUserId());
-
     return this._id; // Devuelve el ID del usuario
   }
 }
