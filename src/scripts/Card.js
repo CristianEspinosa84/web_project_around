@@ -77,9 +77,13 @@ export default class Card {
     });
   }
 
+  remove() {
+    this.card.remove();
+  }
+
   updateLikes(likes) {
     this.likes = likes;
-    console.log("Actualizando likes:", likes);
+    // console.log("Actualizando likes:", likes);
     this.likeCounter.textContent = this.likes.length;
     this.likeButton.classList.toggle(
       "element__like-black",

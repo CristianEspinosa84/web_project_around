@@ -8,14 +8,14 @@ export default class Popup {
   open() {
     this._popup.classList.add("popup__opened");
     this._popup.classList.remove("closed-window", "popup-closed");
-    this._overlay.classList.add("popup__opened"); // Muestra el overlay
+    this._overlay.classList.add("overlay__visible"); // Muestra el overlay
     document.addEventListener("keydown", this._handleEscClose);
   }
 
   close() {
     this._popup.classList.remove("popup__opened");
     this._popup.classList.add("closed-window", "popup-closed");
-    this._overlay.classList.remove("popup__opened"); // Oculta el overlay
+    this._overlay.classList.remove("overlay__visible"); // Oculta el overlay
     document.removeEventListener("keydown", this._handleEscClose);
   }
 

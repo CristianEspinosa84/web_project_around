@@ -36,7 +36,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", (event) => {
       event.preventDefault(); // Evita el comportamiento de recarga del formulario
       this._handleFormSubmit(this._getInputValues()); // Llama al callback con los datos del formulario
-      this.close();
+      // this.close();
     });
   }
 

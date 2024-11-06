@@ -74,10 +74,15 @@
   height: 25px;
   border: none;
   cursor: pointer;
+  display: flex;
 }
 
 .element__like-black {
   background-image: url(../Images/like_black.jpg);
+}
+
+.element__like-counter {
+  margin-left: 8px;
 }
 
 @media screen and (max-width: 915px) {
