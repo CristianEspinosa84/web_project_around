@@ -34,6 +34,8 @@ const popupOpenImage = document.querySelector("#popup__image");
 const popupCloseImge = document.querySelector(".popup__close");
 const closedAll = document.querySelector(".page");
 
+let cardList = null;
+
 // Instancia de la clase Api
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web-es-cohort-17",
@@ -67,7 +69,7 @@ api
     api
       .getInitialCards()
       .then((cards) => {
-        const cardList = new Section(
+        cardList = new Section(
           {
             items: cards,
             renderer: (element) => {
@@ -150,6 +152,7 @@ function handleDeleteClick(card) {
 
 // Función para añadir una nueva tarjeta
 function addCardSubmit({ title, link }) {
+  console.log('cardList', cardList);
   addCardPopup.renderLoading(true);
 
   api

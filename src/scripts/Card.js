@@ -77,6 +77,10 @@ export default class Card {
     });
   }
 
+  remove(){
+    this.card.remove();
+  }
+
   updateLikes(likes) {
     this.likes = likes;
     console.log("Actualizando likes:", likes);
