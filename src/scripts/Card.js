@@ -11,7 +11,7 @@ export default class Card {
   ) {
     this.title = title;
     this.link = link;
-    this.likes = likes || []; // Número de "me gusta" iniciales
+    this.likes = likes; // Número de "me gusta" iniciales
     this._id = _id; // ID de la tarjeta en el servidor
     this.owner = owner; // Guardamos la información del propietario
     this.currentUser = currentUser; // Propiedad currentUser que representa al usuario actual
@@ -52,13 +52,13 @@ export default class Card {
     this.likeCounter = likeCounter;
 
     // Muestra el icono de eliminación solo si el usuario es el dueño de la tarjeta
-    if (this.owner._id !== this.currentUser._id) {
+    if (this.owner._id !== this.currentUser) {
       trashButton.style.display = "none";
     }
 
     // Marca "me gusta" si el usuario actual ya ha dado "me gusta"
-    if (this.likes.some((like) => like._id === this.currentUser._id)) {
-      likeButton.classList.add(".element__like-black");
+    if (this.likes.some((like) => like._id === this.currentUser)) {
+      likeButton.classList.add("element__like-black");
     }
   }
 
@@ -82,8 +82,8 @@ export default class Card {
     console.log("Actualizando likes:", likes);
     this.likeCounter.textContent = this.likes.length;
     this.likeButton.classList.toggle(
-      ".element__like-black",
-      this.likes.some((like) => like._id === this.currentUser._id)
+      "element__like-black",
+      this.likes.some((like) => like._id === this.currentUser)
     ); // Añade o quita el color según el estado del "me gusta"
   }
 

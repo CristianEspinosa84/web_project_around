@@ -67,7 +67,6 @@ api
     api
       .getInitialCards()
       .then((cards) => {
-        console.log(cards);
         const cardList = new Section(
           {
             items: cards,
@@ -160,7 +159,7 @@ function addCardSubmit({ title, link }) {
         newCardData.name,
         newCardData.link,
         {
-          links: newCardData.likes,
+          likes: newCardData.likes,
           _id: newCardData._id,
           owner: newCardData.owner,
         },
